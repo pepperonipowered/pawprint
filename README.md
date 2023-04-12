@@ -17,3 +17,5 @@ A simple blogging application using Laravel, AlpineJS, and more.
   <li>Run npm run dev</li>
   <li>Go to link localhost:8000</li>
 </ol>
+
+TEST
