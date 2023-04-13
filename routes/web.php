@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,17 +21,28 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/blogs', function () {
-    return view('blogs');
-})->name('blogs');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// All user roles have a common middleware
+// Route::group(['middleware' => ['auth', 'verified']], function () {
+//     // Admin route group where uri's are admin/dashboard... & routes are route(admin.index)...
+//     // Note: we use user defined middlware called is_admin to separate views
+//     Route::group([
+//         'controller' => AdminController::class, 
+//         'middleware' => 'is_admin',
+//         'name' => 'admin.', 
+//         'prefix' => 'admin'
+//     ], function () {
+//         Route::get('/dashboard', 'index')->name('dashboard');
+//     });
+//     // User/author route group where uri's are author/dashboard... & routes are route(author.index)...
+//     Route::group(
+//         [
+//         'controller' => UserController::class, 
+//         'name' => 'author.', 
+//         'prefix' => 'author'
+//     ], function () {
+//         Route::get('/dashboard', 'index')->name('dashboard');
+//     });
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,4 +50,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Authentication routes
 require __DIR__.'/auth.php';

@@ -9,12 +9,12 @@
             <a href="/blogs" class="text-white text-xl h-max w-max bg-blue-500 px-3 rounded-full">More Blogs ></a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {{-- <x-post-card/>
             <x-post-card/>
             <x-post-card/>
             <x-post-card/>
             <x-post-card/>
-            <x-post-card/>
-            <x-post-card/>
+            <x-post-card/> --}}
         </div>
         
     </x-slot>
