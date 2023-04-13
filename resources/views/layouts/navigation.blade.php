@@ -15,6 +15,24 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @hasrole('admin')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Manage Posts') }}
+                        </x-nav-link>
+                    @endhasrole
+                    @hasrole('moderator')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Manage Author Posts') }}
+                        </x-nav-link>
+                    @endhasrole
+                    @hasrole('author')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('My Posts') }}
+                        </x-nav-link>
+                    @endhasrole
                 </div>
             </div>
 
