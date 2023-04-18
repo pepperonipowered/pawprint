@@ -6,14 +6,12 @@ use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+    Notes:
+        migrate wordweaver
+        edit uri
+        create buttons components
+        better table
+        better card
 */
 
 Route::get('/', function () {
@@ -25,7 +23,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Admin route group where uri's are admin/dashboard... & routes are route(admin.index)...
     Route::group([
         'controller' => AdminController::class, 
-        'middleware' => 'role:admin',
+        'middleware' => 'admin',
         'name' => 'admin.', 
         'prefix' => 'admin'
     ], function () {
@@ -37,7 +35,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // User/author route group where uri's are author/dashboard... & routes are route(author.index)...
     Route::group([
         'controller' => PostController::class, 
-        'middleware' => 'role:author',
+        'middleware' => 'author',
         'name' => 'author.', 
         'prefix' => 'author'
     ], function () {
