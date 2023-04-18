@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Moderator;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ModeratorController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('moderator.index');
+        return view('author.posts.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class ModeratorController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.posts.create');
     }
 
     /**

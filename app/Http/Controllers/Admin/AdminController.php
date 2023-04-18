@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -13,6 +15,16 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.index');
+    }
+    
+    public function user_list()
+    {
+        $users = User::all()->except(Auth::id());
+        return view('admin.user_list' , compact('users'));
+    }
+    public function post_list()
+    {
+        return view('admin.post_list');
     }
 
     /**

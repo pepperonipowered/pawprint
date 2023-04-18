@@ -5,34 +5,39 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    @role('admin')
+                    <a href="{{ route('admin.dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
+                    @endrole
+                    @role('author')
+                    <a href="{{ route('author.dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                    @endrole
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    @hasrole('admin')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    @role('admin')
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Home') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
                             {{ __('Manage Users') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('admin.posts')" :active="request()->routeIs('admin.posts')">
                             {{ __('Manage Posts') }}
                         </x-nav-link>
-                    @endhasrole
-                    @hasrole('moderator')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Manage Author Posts') }}
-                        </x-nav-link>
-                    @endhasrole
-                    @hasrole('author')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    @endrole
+                    @role('author')
+                        <x-nav-link :href="route('author.dashboard')" :active="request()->routeIs('author.dashboard')">
                             {{ __('My Posts') }}
                         </x-nav-link>
-                    @endhasrole
+                        <x-nav-link :href="route('author.create')" :active="request()->routeIs('author.create')">
+                            {{ __('Publish a Post') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -85,9 +90,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            @role('admin')
+            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                {{ __('Home') }}
+            </x-nav-link>
+            <x-responsive-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                {{ __('Manage Users') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.posts')" :active="request()->routeIs('admin.posts')">
+                {{ __('Manage Posts') }}
+            </x-responsive-nav-link>
+        @endrole
+        @role('author')
+            <x-responsive-nav-link :href="route('author.dashboard')" :active="request()->routeIs('author.dashboard')">
+                {{ __('My Posts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('author.create')" :active="request()->routeIs('author.create')">
+                {{ __('My Posts') }}
+            </x-responsive-nav-link>
+        @endrole
         </div>
 
         <!-- Responsive Settings Options -->

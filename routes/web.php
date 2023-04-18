@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Moderator\ModeratorController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    
     return view('welcome');
 })->name('home');
 
@@ -31,28 +29,20 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         'name' => 'admin.', 
         'prefix' => 'admin'
     ], function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
-    });
-
-    // Modderator route group where uri's are modderator/dashboard... & routes are route(modderator.index)...
-    Route::group([
-        'controller' => ModeratorController::class,
-        'middleware' => 'role:moderator',
-        'name' => 'moderator.',
-        'prefix' => 'moderator'
-    ], function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/dashboard', 'index')->name('admin.dashboard');
+        Route::get('/users', 'user_list')->name('admin.users');
+        Route::get('/posts', 'post_list')->name('admin.posts');
     });
 
     // User/author route group where uri's are author/dashboard... & routes are route(author.index)...
-    Route::group(
-        [
-        'controller' => UserController::class, 
+    Route::group([
+        'controller' => PostController::class, 
         'middleware' => 'role:author',
         'name' => 'author.', 
         'prefix' => 'author'
     ], function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/dashboard', 'index')->name('author.dashboard');
+        Route::get('/posts/create', 'create')->name('author.create');
     });
 });
 
