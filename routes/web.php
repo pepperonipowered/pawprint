@@ -23,7 +23,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Admin route group where uri's are admin/dashboard... & routes are route(admin.index)...
     Route::group([
         'controller' => AdminController::class, 
-        'middleware' => 'admin',
         'name' => 'admin.', 
         'prefix' => 'admin'
     ], function () {
@@ -35,7 +34,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // User/author route group where uri's are author/dashboard... & routes are route(author.index)...
     Route::group([
         'controller' => PostController::class, 
-        'middleware' => 'author',
         'name' => 'author.', 
         'prefix' => 'author'
     ], function () {
