@@ -18,4 +18,4 @@ A simple blogging application using Laravel, AlpineJS, and more.
   <li>Go to link localhost:8000</li>
 </ol>
 
-TEST
+This is a test project for college subject which may or may not be complete in this repo but saved somewhere in my local machine
